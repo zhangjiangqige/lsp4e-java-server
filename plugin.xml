@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.lsp4e.languageServer">
+      <server
+            class="earth.zhangjiangqige.LangServer"
+            id="earth.zhangjiangqige.langserver.java"
+            label="Java Language Server">
+      </server>
+      <contentTypeMapping
+            contentType="org.eclipse.jdt.core.javaSource"
+            id="earth.zhangjiangqige.langserver.java">
+      </contentTypeMapping>
+   </extension>
+
+   <!--
+         This extension section is somehow crucial for triggering the language
+         server if we are targeting java. Without this section the langguage
+         server won't be triggered.
+    -->
+   <extension
+         point="org.eclipse.core.filebuffers.documentSetup">
+      <participant
+            class="org.eclipse.lsp4e.ConnectDocumentToLanguageServerSetupParticipant"
+            contentTypeId="org.eclipse.jdt.core.javaSource">
+      </participant>
+   </extension>
+</plugin>
